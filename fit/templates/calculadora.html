@@ -97,53 +97,53 @@
 
               
                 
-
+                <form action="add">
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="inputGroupSelect01">Gênero</label>
-                    <select class="form-select" id="inputGroupSelect01">
+                    <select class="form-select" id="inputGroupSelect01" name="genero">
                         <option value="1">Homen</option>
                         <option value="2">Mulher</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Anos </span>
+                    <span class="input-group-text" id="inputGroup-sizing-default" >Anos </span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="anos">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Altura (cm) </span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="altura">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Peso (kl)</span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="peso">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Pescoço (cm) </span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="pescoco">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Cintura (cm) </span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="cintura">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Quadril (cm) </span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
+                        aria-describedby="inputGroup-sizing-default" name="quadril">
                 </div>
 
 
                 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="inputGroupSelect01">Qual é o seu objetivo?</label>
-                    <select class="form-select" id="inputGroupSelect01">
+                    <select class="form-select" id="inputGroupSelect01" name="objetivo">
                         <option value="1">Manter peso </option>
                         <option value="2">Perde peso (leve) </option>
                         <option value="3">Perde peso</option>
@@ -155,7 +155,7 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="inputGroupSelect01">Escolha o nível de atividade
                     </label>
-                    <select class="form-select" id="inputGroupSelect01">
+                    <select class="form-select" id="inputGroupSelect01" name="atividade">
                         <option value="1">Sedentario</option>
                         <option value="1">Levemente ativo</option>
                         <option value="2">Moderadamente</option>
@@ -165,16 +165,17 @@
                 </div>
 
                
-            </form>
+           
             </div>
         </div>
     </div>
 
     <div class="container text-center">      
         <div class="col">
-            <button class="btn btn-outline-success" type="submit"><a class="nav-link active" aria-current="page" href="{% url 'output'%}">Enviar</button></a>
+            <button class="btn btn-outline-success" type="submit"><a class="nav-link active" aria-current="page" href="{% url 'add'%}">Enviar</button></a>
         </div> 
     </div>
+</form>
     <br><br><br><br>
     <div class="container text-center">
         <div class="row align-items-start">
