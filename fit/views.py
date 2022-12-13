@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic.edit import CreateView
-from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render
+from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.models import User, Group
 from fit.models import Post 
 from fit.forms import UsuarioForm
 from django.urls import reverse_lazy
+from fit.models import Perfil
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -15,7 +16,7 @@ def login(request):
 
 tdee = 0
 def add(request):
-    genero = request.POST["genero"]
+    genero = int(request.POST["genero"])
     anos = float(request.POST["anos"])
     altura = float(request.POST["altura"])
     peso = float(request.POST["peso"])
@@ -23,17 +24,26 @@ def add(request):
     cintura = float(request.POST["cintura"])
     quadril = float(request.POST["quadril"])
     objetivo = request.POST["objetivo"]
-    atividade = request.POST["atividade"]
+    atividade = int(request.POST["atividade"])
 
 
     if genero == 1:
-        tdee = float((13.67*peso)+(5*altura)-(6.76* anos)+66.5)
+        tmb = float((13.67*peso)+(5*altura)-(6.76* anos)+66.5)
+        tdee = tmb
         tdee_semana = float(tdee*7)
+
     else:
-        tdee = float((9.56*peso)+(1.85*altura)-(4.68* anos)+665)
+        tmb = float((9.56*peso)+(1.85*altura)-(4.68* anos)+665)
+        tdee = tmb
         tdee_semana = float(tdee*7)
+        tdee_sedentario = tmb*1.2
+        tdee_ExeLeve =float(tmb*1.375)
+        tdee_ExeMOderado =float(tmb*1.55)
+        tdee_ExePesado =float(tmb*1.725)
+        tdee_atleta =float(tmb*1.9)
+        
     imc = peso / (altura*altura)
-    tupla = (tdee,tdee_semana,imc)
+    tupla = str((tdee,tdee_semana,tmb,tdee_sedentario,tdee_ExeLeve,tdee_ExeMOderado,tdee_ExePesado,tdee_atleta,imc))
     return render(request,"output.html", {"tupla":tupla})
 
 def user(request):
@@ -61,9 +71,41 @@ class UsuarioCreate(CreateView):
     form_class = UsuarioForm
     success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        grupo = get_object_or_404(Group, name="Docente")
+
+        url = super().form_valid(form)
+
+        self.object.groups.add(grupo)
+        self.object.save()
+
+        Perfil.objects.create(usuario=self.object)
+
+        return url
+
+
     def get_context_data(self, *args,**kwargs):
         context = super().get_context_data(*args,**kwargs)
 
         context['botao'] = "cadastro"
+
+        return context
+
+
+class PerfilUpdate(UpdateView):
+    template_name = "calculadora.html"
+    model = Perfil
+    fields = ['peso','altua']
+    success_url = reverse_lazy("index.html")
+
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Perfil, usuario=self.request.user)
+        return self.object
+
+    def get_context_data(self, *args,**kwargs):
+        context = super().get_context_data(*args,**kwargs)
+
+        context["botao"] = "atualizar"
 
         return context

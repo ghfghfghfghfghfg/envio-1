@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from fit import views
 from django.contrib.auth import views as auth_views 
-from fit.views import UsuarioCreate
+from fit.views import UsuarioCreate,PerfilUpdate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +40,5 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('logout/', auth_views.LogoutView.as_view(),name="logout"),
     path('registrar/', UsuarioCreate.as_view(),name="registrar"),
+    path('atualizar/', PerfilUpdate.as_view(),name="atualizar"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
