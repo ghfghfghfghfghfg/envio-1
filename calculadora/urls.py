@@ -20,18 +20,24 @@ from fit.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 from fit import views
+from django.contrib.auth import views as auth_views 
+from fit.views import UsuarioCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name="index"),
-    path('login/',login,name="login"),
-    path('output/',output,name="output"),
-    path('output/',output,name="output"),
+    path('login/', auth_views.LoginView.as_view(
+        template_name = "login.html"
+    ),name="login"),
+    path('login/calculadora/add',add,name="add"),
+    path('calculadora/add',add,name="add"),
     path('user/',user,name="user"),
-    path('signup/',signup,name="signup"),
+    #path('signup/',signup,name="signup"),
     path('calculadora/',calculadora,name="calculadora"),
     path('blog/',blog,name="blog"),
     path('sobrenos/',sobrenos,name="sobrenos"),
     path('posts/<int:post_id>',views.postagemblog),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('logout/', auth_views.LogoutView.as_view(),name="logout"),
+    path('registrar/', UsuarioCreate.as_view(),name="registrar"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,15 +1,11 @@
-#from django import Modelform
-from django import forms
-from fit.models import *
+from django import forms 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
-class calforms(forms.ModelForm):
+class UsuarioForm(UserCreationForm):
+    email = forms.EmailField(max_length=200)
+
     class Meta:
-        model = CalculadoraForms
-        fields = '__all__'
-
-    widgets = {
-            'genero': forms.RadioSelect(),
-            'objetivo': forms.RadioSelect(),
-            'atividade': forms.RadioSelect(),
-        }
+        model = User 
+        fields = ['username','email','password1','password2']

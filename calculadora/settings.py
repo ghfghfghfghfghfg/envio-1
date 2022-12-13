@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'fit',
     'ckeditor',
     'ckeditor_uploader',
+
     'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT =   os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+
+LOGIN_REDIRECT_URL = "index"
+LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "index"

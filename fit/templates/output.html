@@ -12,14 +12,8 @@
 </style>
 <div class="container text-center">
 
-  {% block user %}
+  {% block content %}
   <h1><strong>Com base mas suas informaçoes esse e o  resultado:</h1></strong>
-  
-
-  {{imc}}
-  {% endblock user %}
-
-
 
  
 <div class="container">
@@ -29,10 +23,10 @@
 <div class="left">
   <div class="card" style="width: 14rem;">
       <div class="card-body">
-          <h5 class="card-title">xxxxxx</h5>
+          <h5 class="card-title">{{tupla.1}}</h5>
           <h6 class="card-subtitle mb-4 text-muted">Calorias por dia</h6>
           <hr>
-          <h5 class="card-title">xxxxx</h5>
+          <h5 class="card-title">{{tupla.2}}</h5>
           <h6 class="card-subtitle mb-4 text-muted">Calorias por semana</h6>
       </div>
     </div>
@@ -504,4 +498,5 @@
 
 </div>
 </div>
+{% endblock  %}
 {% endblock main %}
