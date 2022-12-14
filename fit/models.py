@@ -21,7 +21,7 @@ class Post(models.Model):
 
 
 class Perfil(models.Model):
-    peso = models.CharField(max_length=100,null=True)
-    altura = models.CharField(max_length=100,null=True)
-    usuario = models.OneToOneField(User,on_delete=models.PROTECT)
+    peso = models.CharField(max_length=2,null=True)
+    altura = models.CharField(max_length=3,null=True)
+    usuario = models.OneToOneField(User,on_delete=models.CASCADE)
 

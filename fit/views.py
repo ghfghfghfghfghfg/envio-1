@@ -6,6 +6,7 @@ from fit.models import Post
 from fit.forms import UsuarioForm
 from django.urls import reverse_lazy
 from fit.models import Perfil
+from django.shortcuts import get_object_or_404
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -16,6 +17,8 @@ def login(request):
 
 tdee = 0
 def add(request):
+
+    
     genero = int(request.POST["genero"])
     anos = float(request.POST["anos"])
     altura = float(request.POST["altura"])
@@ -23,7 +26,7 @@ def add(request):
     pescoço = float(request.POST["pescoço"])
     cintura = float(request.POST["cintura"])
     quadril = float(request.POST["quadril"])
-    objetivo = request.POST["objetivo"]
+    objetivo = float(request.POST["objetivo"])
     atividade = int(request.POST["atividade"])
 
 
@@ -93,14 +96,14 @@ class UsuarioCreate(CreateView):
 
 
 class PerfilUpdate(UpdateView):
-    template_name = "calculadora.html"
+    template_name = "atualizar.html"
     model = Perfil
-    fields = ['peso','altua']
-    success_url = reverse_lazy("index.html")
+    fields = ['peso','altura']
+    success_url = reverse_lazy("calculadora")
 
 
     def get_object(self, queryset=None):
-        self.object = get_object_or_404(Perfil, usuario=self.request.user)
+        self.object = get_object_or_404(Perfil,usuario=self.request.user)
         return self.object
 
     def get_context_data(self, *args,**kwargs):
