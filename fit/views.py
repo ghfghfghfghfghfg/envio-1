@@ -24,22 +24,15 @@ def add(request):
     anos = str(request.POST["anos"])
     altura = str(request.POST["altura"])
     peso = str(request.POST["peso"])
-    pescoço = str(request.POST["pescoço"])
-    cintura = str(request.POST["cintura"])
-    quadril = str(request.POST["quadril"])
-    objetivo = str(request.POST["objetivo"])
     atividade = int(request.POST["atividade"])
 
 
-    if anos == "" or altura == "" or peso == "" or pescoço == "" or cintura == "" or  quadril == "":
+    if anos == "" or altura == "" or peso == "":
             return render(request,"calculadora.html")
 
     anos = float(request.POST["anos"])
     altura = float(request.POST["altura"])
     peso = float(request.POST["peso"])
-    pescoço = float(request.POST["pescoço"])
-    cintura = float(request.POST["cintura"])
-    quadril = float(request.POST["quadril"])
     imc = peso / (altura*altura)
 
 
@@ -68,23 +61,24 @@ def add(request):
 
 
     else:
-        tmb = float((9.56*peso)+(1.85*altura)-(4.68* anos)+665)
+        tmb = round(float((9.56*peso)+(1.85*altura)-(4.68* anos)+66.5))
         if atividade ==1:
-            tdee = float(tmb*1.2)
+            tdee = round(float(tmb*1.2))
         elif atividade ==2:
-            tdee = float(tmb*1.375)
+            tdee = round(float(tmb*1.375))
         elif atividade ==3:
-            tdee =float(tmb*1.55)
+            tdee = round(float(tmb*1.55))
         elif atividade ==4:
-            tdee = float(tmb*1.725)
+            tdee =round(float(tmb*1.725))
         else:
-            tdee = float(tmb*1.9)
-        tdee_semana = float(tdee*7)
-        tdee_sedentario = float(tmb*1.2)
-        tdee_ExeLeve =float(tmb*1.375)
-        tdee_ExeMOderado =float(tmb*1.55)
-        tdee_ExePesado =float(tmb*1.725)
-        tdee_atleta =float(tmb*1.9)
+            tdee = round(float(tmb*1.9))
+
+        tdee_semana = round(float(tdee*7))
+        tdee_sedentario = round(float(tmb*1.2))
+        tdee_ExeLeve = round(float(tmb*1.375))
+        tdee_ExeMOderado = round(float(tmb*1.55))
+        tdee_ExePesado = round(float(tmb*1.725))
+        tdee_atleta = round(float(tmb*1.9))
 
         
     BFPm = round(float((1.20 * imc) + (0.23 * anos) - 16.2))
@@ -182,8 +176,9 @@ class UsuarioCreate(CreateView):
 class PerfilUpdate(UpdateView):
     template_name = "atualizar.html"
     model = Perfil
-    fields = ['peso','altura']
+    fields = ['genero','idade','peso','altura','atividade_fisica']
     success_url = reverse_lazy("calculadora")
+    
 
 
     def get_object(self, queryset=None):

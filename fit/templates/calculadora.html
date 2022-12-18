@@ -48,7 +48,11 @@
     </style>
     <div class="container text-center">
   dados:
-  {{user.perfil.peso}}
+  geneo:{{user.perfil.genero}}
+  peso:{{user.perfil.peso}}
+  altura:{{user.perfil.altura}}
+  atividade fisisca:{{user.perfil.atividade_fisica}}
+
 
 
       {% block content %}
@@ -631,36 +635,7 @@
                         aria-describedby="inputGroup-sizing-default" >
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Pescoço (cm) </span>
-                    <input type="text" class="form-control" name="pescoço" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Cintura (cm) </span>
-                    <input type="text" class="form-control" name="cintura" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" >
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Quadril (cm) </span>
-                    <input type="text" class="form-control" name="quadril" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" name="quadril">
-                </div>
-
-
-                
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Qual é o seu objetivo?</label>
-                    <select class="form-select"  name="objetivo" id="inputGroupSelect01" name="objetivo">
-                        <option value="1">Manter peso </option>
-                        <option value="2">Perde peso (leve) </option>
-                        <option value="3">Perde peso</option>
-                        <option value="4">Ganhar peso (leve) </option>
-                        <option value="5">Ganhar peso</option>
-                    </select>
-                </div>
+            
 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="inputGroupSelect01">Escolha o nível de atividade
@@ -673,19 +648,19 @@
                         <option value="5">Extremanente</option>
                     </select>
                 </div>
-
+                <div class="container text-center">      
+                  <div class="col">
+                      <input type="submit" class="btn btn-outline-success">
+                      
+                  </div> 
+              </div>
                
            
             </div>
         </div>
     </div>
 
-    <div class="container text-center">      
-        <div class="col">
-            <input type="submit" class="btn btn-outline-success">
-            
-        </div> 
-    </div>
+
 </form>
 
 {%endif%}

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField  
 from ckeditor_uploader.fields import RichTextUploadingField  
 from django.contrib.auth.models import User
+from django.db.models import Func, IntegerField
 # Create your models here.
 
 
@@ -20,8 +21,28 @@ class Post(models.Model):
         return self.titulo
 
 
+LISTA_SEXO= [
+    ('Masculino', 'Masculino'),
+    ('Feminino', 'Feminino'),
+]
+
+ATIVIDADE=[
+    ('sedentario','sedentario'),
+    ('levemente ativo','levemente ativo'),
+    ('moderadamente','moderadamente'),
+    ('muito ativo','muito ativo'),
+    ('extremamente','extremamente'),
+
+]
+
 class Perfil(models.Model):
-    peso = models.CharField(max_length=2,null=True)
+    genero = models.CharField(max_length=150,choices=LISTA_SEXO,default='Masculino',null=True)
+    idade = models.IntegerField(max_length=2,null=True)
+    peso = models.IntegerField(max_length=3,null=True)
     altura = models.CharField(max_length=3,null=True)
+    atividade_fisica = models.CharField(max_length=150,choices=ATIVIDADE,default='Feminino',null=True)
+    #imc = (float(idade)-float(peso))
+
+
     usuario = models.OneToOneField(User,on_delete=models.CASCADE)
 
