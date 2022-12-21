@@ -33,7 +33,7 @@ def add(request):
     anos = float(request.POST["anos"])
     altura = float(request.POST["altura"])
     peso = float(request.POST["peso"])
-    imc = peso / (altura*altura)
+    imc = round(peso / ((altura/100)*(altura/100)),1)
 
 
     if genero == 1:
@@ -134,6 +134,9 @@ def signup(request):
     return render(request,"sign-up.html")
 
 def calculadora(request):
+    id =  request.user.id
+    objeto = Perfil.objects.filter(usuario__id = id )
+    print(objeto.values())
     return render(request,"calculadora.html")
 
 def blog(request):
@@ -169,7 +172,6 @@ class UsuarioCreate(CreateView):
         context = super().get_context_data(*args,**kwargs)
 
         context['botao'] = "cadastro"
-
         return context
 
 
@@ -180,15 +182,14 @@ class PerfilUpdate(UpdateView):
     success_url = reverse_lazy("calculadora")
     
 
-
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Perfil,usuario=self.request.user)
         return self.object
 
     def get_context_data(self, *args,**kwargs):
         context = super().get_context_data(*args,**kwargs)
-
-        context["botao"] = "atualizar"
+        context["botao"] = "atualizar22222"
+        context['valor_final'] = 10000
 
         return context
 
